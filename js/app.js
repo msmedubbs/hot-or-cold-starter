@@ -2,21 +2,21 @@ var theAnswer = 10;
 var guessCounter = 0;
 
 var guessCompare = function (latestGuess) {
-	var Distance = Math.abs(theAnswer-latestGuess);
+	var distance = Math.abs(theAnswer-latestGuess);
 
-	if (latestGuess === theAnswer) {
+	if (latestGuess == theAnswer) {
 		$("#feedback").text("You guessed my number!");
 	}
-	else if (Distance >= 50) {
+	else if (distance >= 50) {
 		$("#feedback").text("Ice cold");
 	}
-	else if (Distance >= 30 && Distance < 50) {
+	else if (distance >= 30 && distance < 50) {
 		$("#feedback").text("Cold");
 	}
-	else if (Distance >= 20 && Distance < 30) {
+	else if (distance >= 20 && distance < 30) {
 		$("#feedback").text("Warm");
 	}
-	else if (Distance >= 10 && Distance < 20) {
+	else if (distance >= 10 && distance < 20) {
 		$("#feedback").text("Hot");
 	}
 	else {
@@ -34,7 +34,6 @@ $(document).ready(function () {
 	/*--- Display information modal box ---*/
 	$(".what").click(function () {
 	$(".overlay").fadeIn(1000);
-
 	});
 
 	/*--- Hide information modal box ---*/
@@ -49,13 +48,12 @@ $(document).ready(function () {
 
 	/*--- Watch for Guess click ---*/
 	$("#guessButton").click(function () {
-    var my_entry = $("#userGuess").val();
+		var my_entry = $("#userGuess").val();
 
         if (my_entry >= 1 && my_entry <= 100){
            guessCounter += 1;
-           console.log(guessCounter);
            guessCompare(my_entry);
-           //$("#count").text();
+           $("#count").text(guessCounter);
         }
         else{
 			$("#feedback").text("Enter a guess from 1 to 100");
