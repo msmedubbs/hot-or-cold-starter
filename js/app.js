@@ -49,6 +49,7 @@ var newGame = function () {
 	$("#count").text(guessCounter);
 	$("#userGuess").val('');
 	$("#userGuess").attr("placeholder", "Enter your Guess");
+	$("#guessList").empty();
 };
 
 $(document).ready(function () {
@@ -73,6 +74,7 @@ $(document).ready(function () {
 		var my_entry = $("#userGuess").val();
 		guessCounter += 1;
 		$("#count").text(guessCounter);
+		$("#guessList").append("<li>" + my_entry + "</li>");
 
         if (my_entry >= 1 && my_entry <= 100){
 			if (guessCounter == 1) {
@@ -93,6 +95,7 @@ $(document).ready(function () {
 			var my_entry = $("#userGuess").val();
 			guessCounter += 1;
 			$("#count").text(guessCounter);
+			$("#guessList").append("<li>" + my_entry + "</li>");
 
 			if (my_entry >= 1 && my_entry <= 100){
 				if (guessCounter == 1) {
