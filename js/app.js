@@ -1,5 +1,6 @@
 var theAnswer = Math.floor((Math.random()*100)+1);
 var guessCounter = 0;
+var prevGuess = 0;
 
 var guessCompare = function (latestGuess) {
 	var distance = Math.abs(theAnswer-latestGuess);
@@ -22,6 +23,23 @@ var guessCompare = function (latestGuess) {
 	else {
 		$("#feedback").text("Very Hot");
 	}
+	prevGuess = latestGuess;
+};
+
+var lastCompare = function (latestGuess) {
+	var latestDistance = Math.abs(theAnswer-latestGuess);
+	var prevDistance = Math.abs(theAnswer-prevGuess);
+
+	if (latestGuess == theAnswer) {
+		$("#feedback").text("You guessed my number!");
+	}
+	else if (latestDistance >= prevDistance) {
+		$("#feedback").text("Getting colder...");
+	}
+	else {
+		$("#feedback").text("Getting warmer!");
+	}
+	prevGuess = latestGuess;
 };
 
 var newGame = function () {
@@ -57,7 +75,12 @@ $(document).ready(function () {
 		$("#count").text(guessCounter);
 
         if (my_entry >= 1 && my_entry <= 100){
-           guessCompare(my_entry);
+			if (guessCounter == 1) {
+				guessCompare(my_entry);
+			}
+			else{
+				lastCompare(my_entry);
+			}
         }
         else{
 			$("#feedback").text("Enter a guess from 1 to 100");
@@ -72,7 +95,12 @@ $(document).ready(function () {
 			$("#count").text(guessCounter);
 
 			if (my_entry >= 1 && my_entry <= 100){
-				guessCompare(my_entry);
+				if (guessCounter == 1) {
+					guessCompare(my_entry);
+				}
+				else{
+					lastCompare(my_entry);
+				}
 			}
 			else{
 				$("#feedback").text("Enter a guess from 1 to 100");
