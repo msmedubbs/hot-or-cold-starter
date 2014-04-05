@@ -1,4 +1,4 @@
-var theAnswer = 10;
+var theAnswer = Math.floor((Math.random()*100)+1);
 var guessCounter = 0;
 
 var guessCompare = function (latestGuess) {
@@ -26,7 +26,11 @@ var guessCompare = function (latestGuess) {
 
 var newGame = function () {
 	guessCounter = 0;
-	// generate new theAnswer
+	theAnswer = Math.floor((Math.random()*100)+1);
+	$("#feedback").text("Make your Guess!");
+	$("#count").text(guessCounter);
+	$("#userGuess").val('');
+	$("#userGuess").attr("placeholder", "Enter your Guess");
 };
 
 $(document).ready(function () {
@@ -49,15 +53,31 @@ $(document).ready(function () {
 	/*--- Watch for Guess click ---*/
 	$("#guessButton").click(function () {
 		var my_entry = $("#userGuess").val();
+		guessCounter += 1;
+		$("#count").text(guessCounter);
 
         if (my_entry >= 1 && my_entry <= 100){
-           guessCounter += 1;
            guessCompare(my_entry);
-           $("#count").text(guessCounter);
         }
         else{
 			$("#feedback").text("Enter a guess from 1 to 100");
         }
+    });
+
+	/*--- Watch for Enter ---*/
+    $(document).keypress(function(e){
+		if(e.which == 13){
+			var my_entry = $("#userGuess").val();
+			guessCounter += 1;
+			$("#count").text(guessCounter);
+
+			if (my_entry >= 1 && my_entry <= 100){
+				guessCompare(my_entry);
+			}
+			else{
+				$("#feedback").text("Enter a guess from 1 to 100");
+			}
+		}
     });
 
 });
